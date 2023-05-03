@@ -1,5 +1,11 @@
 import sys
 from PyQt5.QtWidgets import QApplication,QMainWindow
+import os
+from utils import folderexist
+
+#create folder
+if(folderexist('D:\\GenshinCalendar')==0):
+    os.makedirs('D:\\GenshinCalendar')
 
 import GUI
 
