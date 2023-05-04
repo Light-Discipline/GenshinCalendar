@@ -9,12 +9,12 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-from utils import getnamelist,downloadpic,search_items,filenamelist
+from utils import getnamelist,downloadpic,search_items,filenamelist,folderexist
 from PyQt5.QtGui import QPixmap,QPalette
 from PyQt5.QtCore import Qt
 import os
-list1=getnamelist()
 
+list1=getnamelist()
 #list1=[["5-1","5-2"],["4-1","4-2","4-3"],["5-1","5-2","4-1","4-2","4-3"]]
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -91,10 +91,10 @@ class Ui_MainWindow(object):
         self.gridLayout_6.addLayout(self.gridLayout_2, 3, 0, 1, 3)
         self.gridLayout_4 = QtWidgets.QGridLayout()
         self.gridLayout_4.setObjectName("gridLayout_4")
-        self.columnView = QtWidgets.QColumnView(self.centralwidget)
-        self.columnView.setMinimumSize(QtCore.QSize(281, 381))
-        self.columnView.setObjectName("columnView")
-        self.gridLayout_4.addWidget(self.columnView, 1, 0, 2, 1)
+        self.listView = QtWidgets.QListView(self.centralwidget)
+        self.listView.setMinimumSize(QtCore.QSize(281, 381))
+        self.listView.setObjectName("listView")
+        self.gridLayout_4.addWidget(self.listView, 1, 0, 2, 1)
         self.remove_button = QtWidgets.QPushButton(self.centralwidget)
         self.remove_button.setMinimumSize(QtCore.QSize(180, 50))
         self.remove_button.setObjectName("remove_button")
@@ -167,6 +167,7 @@ class Ui_MainWindow(object):
         
         self.starchoose.currentIndexChanged.connect(self.namelistchange)
         self.searchitems_button.clicked.connect(self.search)
+        #self.add_button.clicked.connect(self.add)
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
@@ -211,3 +212,6 @@ class Ui_MainWindow(object):
         self.piclabel_3.setPixmap(QPixmap('D:\\GenshinCalendar\\pictures\\'+name+'./'+filename[2]))
         self.piclabel_4.setPixmap(QPixmap('D:\\GenshinCalendar\\pictures\\'+name+'./'+filename[3]))
         self.piclabel_5.setPixmap(QPixmap('D:\\GenshinCalendar\\pictures\\'+name+'./'+filename[4]))
+        
+    #def add(self):
+        

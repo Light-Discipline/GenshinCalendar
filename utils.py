@@ -1,7 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 import os
-
+import time
 headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko)\Chrome/55.0.2883.87 Safari/537.36'}
 
 def folderexist(path):#create folder
@@ -65,6 +65,7 @@ def getnamelist():#get the list of character's name
     return(star_5,star_4,star_all)
     
 def downloadpic(itemslist):#download the pictures of upgrade materials
+    requests.adapters.DEFAULT_RETRIES = 5
     if(folderexist('D:\\GenshinCalendar\\pictures\\'+itemslist[3])==0):#if already exisited, don't need to download again
         pic_url=itemslist[0]
         #item_url=itemslist[1]
@@ -72,9 +73,11 @@ def downloadpic(itemslist):#download the pictures of upgrade materials
         name=itemslist[3]
         os.makedirs('D:\\GenshinCalendar\\pictures\\'+name)
         for i in range(0,5):
-            pic_file=open('D:\\GenshinCalendar\\pictures\\'+name+'./%d'%(i+1)+item_name[i]+'.png', 'wb')
-            pic_file.write(requests.get(pic_url[i]).content)
-        pic_file.close()
+            with open('D:\\GenshinCalendar\\pictures\\'+name+'./%d'%(i+1)+item_name[i]+'.png', 'wb') as pic_file:
+                print("download%d/5:  "%(i+1)+pic_url[i])
+                time.sleep(1.5)
+                pic_file.write(requests.get(pic_url[i],headers=headers).content)
+        print("download successfully")
         
 def filenamelist(path):
     filenamelist=os.listdir(path)
