@@ -160,7 +160,7 @@ def downloadpic(itemslist):#download the pictures of upgrade materials & get the
         print("pictures downloaded successfully")
         #with open('D:\\GenshinCalendar\\data.csv', "w", encoding="utf-8", newline="") as f:
         
-def filenamelist(path):
+def filenamelist(path):#get the names of the files
     filenamelist=os.listdir(path)
     origin_namelist=[]
     namelist=[]
@@ -173,7 +173,7 @@ def filenamelist(path):
         i=i+1
     return [origin_namelist,namelist]
 
-def readcsv(path):
+def readcsv(path):#read datas from the file
     developlist1=[]
     if(folderexist(path)==0):
         print("Not found")
@@ -188,14 +188,14 @@ def readcsv(path):
                 developlist1.append(row)
     return developlist1
 
-def writecsv(path,developlist1):
+def writecsv(path,developlist1):#write datas to the file
     with open(path, "w", encoding="utf-8", newline="") as f:
         csv_writer = csv.writer(f)
         name=['name','material','days']
         csv_writer.writerow(name)
         csv_writer.writerows(developlist1)
         
-def weekday(Qcal):
+def weekday(Qcal):#what day is today
     today=str(Qcal)
     today=today.split('QDate(')[1]
     today=today.replace(')','')
@@ -203,7 +203,7 @@ def weekday(Qcal):
     weekday=datetime.date(today1).weekday()+1
     return weekday
 
-def showdeveloplist(dlist,wdtype):
+def showdeveloplist(dlist,wdtype):#show developlist today
     dlistshow=[]
     for character in dlist:
         if ((wdtype==1 and character[2]=='周一周四周日') or (wdtype==2 and character[2]=='周二周五周日') or (wdtype==3 and character[2]=='周三周六周日') or wdtype==4):
